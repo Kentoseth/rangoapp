@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
@@ -15,6 +16,12 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^rango/', include('rango.urls')), #this is a tuple that links the urls.py from
-											#the rango app to the main app
+    url(r'^rango/', include('rango.urls')), #this is a tuple that links the urls.py
+											# from the rango app to the main app
 )
+if settings.DEBUG:
+	urlpatterns += patterns(
+	'django.views.static',
+	(r'media/(?P<path>.*)',
+	'serve',
+	{'document_root': settings.MEDIA_ROOT}), )
