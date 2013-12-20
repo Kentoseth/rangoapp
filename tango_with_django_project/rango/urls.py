@@ -4,4 +4,5 @@ from rango import views
 urlpatterns = patterns('',
 		url(r'^$', views.index, name ='index'),
 		url(r'^about', views.about_page, name ='about'),
+		url(r'^add_category/$', views.add_category, name='add_category'), #CH 7
 		url(r'category/(?P<category_name_url>\w+)/$', views.category, name='category'),)
