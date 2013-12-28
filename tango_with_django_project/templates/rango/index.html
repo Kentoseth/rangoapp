@@ -8,8 +8,11 @@
 	</head>
 	
 	<body>
-
+		{% if user.is_authenticated %}
+		<h1>Rango says...hello {{ user.username }}</h1>
+		{% else %}
 		<h1>Rango says...hello world!</h1>
+		{% endif %}
 		
 		{% if categories %}
 			<ul>
@@ -24,7 +27,9 @@
 		
 		<a href="/rango/add_category/">Add a new category</a><br />
 		
-		<a href="/rango/register/">Register Here</a>
+		<a href="/rango/register/">Register Here</a><br />
+		
+		<a href="/rango/login/">Login</a>
 	</body>
 	
 </html>
