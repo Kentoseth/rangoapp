@@ -7,8 +7,9 @@ from django.shortcuts import render_to_response
 from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 def encode_url(str):
 	return str.replace(' ','_')
@@ -162,3 +163,13 @@ def user_login(request):
 			
 	else:
 		return render_to_response('rango/login.html', {}, context)
+
+@login_required
+def restricted(request): #Ch8.6 function, not really important
+	return HttpResponse("Since you're logged in, you can see this text!")
+
+@login_required
+def user_logout(request):
+	logout(request)
+	
+	return HttpResponseRedirect('/rango/')
